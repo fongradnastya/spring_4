@@ -47,23 +47,23 @@ public class ClothesService {
     /**
      * Сохраняет новую запись мебели.
      *
-     * @param furniture Объект мебели для сохранения.
+     * @param clothes Объект мебели для сохранения.
      */
     @Transactional
-    public void save(Clothes furniture) {
-        repository.save(furniture);
+    public void save(Clothes clothes) {
+        repository.save(clothes);
     }
 
     /**
      * Обновляет информацию о мебели.
      *
      * @param id        Идентификатор мебели.
-     * @param furniture Объект мебели для обновления.
+     * @param clothes Объект мебели для обновления.
      */
     @Transactional
-    public void update(int id, Clothes furniture) {
-        furniture.setId(id);
-        repository.save(furniture);
+    public void update(int id, Clothes clothes) {
+        clothes.setId(id);
+        repository.save(clothes);
     }
 
     /**
