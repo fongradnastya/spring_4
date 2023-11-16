@@ -1,36 +1,58 @@
-package com.example.demo;
+package com.example.demo.models;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
-/**
- * Класс предмета одежды
- */
+@Entity
+@Table(name = "clothes")
 public class Clothes {
     /**
      * Идентификатор предмета
      */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     /**
      * Название предмета одежды
      */
+    @Size(min = 2, max = 30, message = "len of name is not between 3 and 30")
+    @Column(name = "item_name")
     private String name;
     /**
      * Цвет предмета одежды
      */
+    @Size(min = 2, max = 30, message = "len of name is not between 3 and 30")
+    @Column(name = "color")
     private String color;
     /**
      * Название бренда
      */
+    @Size(min = 2, max = 30, message = "len of name is not between 3 and 30")
+    @Column(name = "brand")
     private String brand;
     /**
      * Размер одежды
      */
+    @Min(value = 0, message = "quantity can not be negative")
+    @Column(name = "item_size")
     private int size;
     /**
      * Цена товара
      */
+    @Min(value = 0, message = "quantity can not be negative")
+    @Column(name = "price")
     private double price;
     /**
      * Число товара
      */
+    @Min(value = 0, message = "quantity can not be negative")
+    @Column(name = "quantity")
     private int quantity;
 
     /**
@@ -41,24 +63,6 @@ public class Clothes {
         this.brand = "";
         this.price = 0;
         this.quantity = 1;
-    }
-
-    /**
-     * Конструктор класса с параметрами
-     * @param name название одежды
-     * @param color вет одежды
-     * @param brand бренд одежды
-     * @param size размер одежды
-     * @param price цена товара
-     * @param quantity количество товара
-     */
-    public Clothes(String name, String color, String brand, int size, double price, int quantity) {
-        this.name = name;
-        this.color = color;
-        this.brand = brand;
-        this.size = size;
-        this.price = price;
-        this.quantity = quantity;
     }
 
     /**

@@ -1,0 +1,87 @@
+/* Reset margin and padding for the body */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for header */
+header {
+    background-color: #007bff; /* Blue background */
+    color: white; /* White text */
+    padding: 10px 0; /* Padding to give space inside the header */
+    margin: 0; /* Reset any default margin */
+}
+
+/* Style for links inside header */
+header a {
+    color: white;
+    text-decoration: none;
+    padding: 0 15px;
+}
+
+/* Hover effect for links */
+header a:hover {
+    text-decoration: underline;
+}
+
+/* Ensures the content is centered and padded */
+.container {
+    max-width: 960px;
+    margin: auto;
+    padding: 15px;
+}
+
+/* Card styling for furniture items */
+.card {
+    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #007bff;
+}
+
+/* Buttons styling */
+.btn-primary, .btn-info {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover, .btn-info:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+/* Forms and input fields styling */
+form {
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-control {
+    border-radius: 0;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Utility classes for spacing and text alignment */
+.text-center {
+    text-align: center;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+

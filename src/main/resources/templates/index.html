@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Furniture</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="header :: header"></div>
+
+<div class="container">
+    <form th:action="@{clothes/new}" th:method="get" class="mb-4">
+        <button type="submit" class="btn btn-primary">Add New Clothes</button>
+    </form>
+
+    <form th:action="@{/}" th:method="get" class="mb-4">
+        <div class="form-group">
+            <label for="name">Название:</label>
+            <input type="text" id="name" name="name" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-info">Search by Name</button>
+    </form>
+
+    <div class="row">
+        <div th:each="clothes : ${clothes}" class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${clothes.name}">Clothes Name</h5>
+                    <p class="card-text" th:text="'Color: ' + ${clothes.color}">Color</p>
+                    <p class="card-text" th:text="'Brand: ' + ${clothes.brand}">Brand</p>
+                    <p class="card-text" th:text="'Size: ' + ${clothes.size}">Size</p>
+                    <p class="card-text" th:text="'Price: ' + ${clothes.price} + ' $'">Price</p>
+                    <p class="card-text" th:text="'Quantity: ' + ${clothes.quantity} + ' in stock'">Quantity</p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/clothes/{id}(id=${clothes.id})}" class="btn btn-primary">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
