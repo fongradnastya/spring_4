@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * Репозиторий для работы с сущностями мебели.
+ * Репозиторий для работы с предметами одежды
  */
 @Repository
 public interface ClothesRepository extends JpaRepository<Clothes, Integer> {

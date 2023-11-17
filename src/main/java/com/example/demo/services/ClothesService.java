@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
- * Сервис для работы с мебелью.
+ * Сервис для работы с предметами одежды
  */
 @Service
 @Transactional(readOnly = true)
@@ -16,9 +16,8 @@ public class ClothesService {
     private final ClothesRepository repository;
 
     /**
-     * Конструктор для внедрения зависимости репозитория мебели.
-     *
-     * @param repository Репозиторий мебели.
+     * Конструктор для внедрения зависимости репозитория одежды
+     * @param repository Репозиторий с предметами одежды
      */
     @Autowired
     public ClothesService(ClothesRepository repository) {
@@ -26,28 +25,28 @@ public class ClothesService {
     }
 
     /**
-     * Получает все записи мебели.
+     * Получает все записи о предметах одежды
      *
-     * @return Список мебели.
+     * @return Список предметов одежды
      */
     public List<Clothes> findAll() {
         return repository.findAll();
     }
 
     /**
-     * Находит мебель по идентификатору.
+     * Находит предметы одежлы по идентификатору
      *
-     * @param id Идентификатор мебели.
-     * @return Найденная мебель или null, если мебель не найдена.
+     * @param id Идентификатор товара
+     * @return Найденный предмет одежды или null
      */
     public Clothes findOne(int id) {
         return repository.findById(id).orElse(null);
     }
 
     /**
-     * Сохраняет новую запись мебели.
+     * Сохраняет новую запись о предмете одежды
      *
-     * @param clothes Объект мебели для сохранения.
+     * @param clothes Предмет одежды для сохранения.
      */
     @Transactional
     public void save(Clothes clothes) {
@@ -55,10 +54,10 @@ public class ClothesService {
     }
 
     /**
-     * Обновляет информацию о мебели.
+     * Обновляет информацию о предмете одежды
      *
-     * @param id        Идентификатор мебели.
-     * @param clothes Объект мебели для обновления.
+     * @param id        Идентификатор предмета
+     * @param clothes Предмет одежды для обновления
      */
     @Transactional
     public void update(int id, Clothes clothes) {
@@ -67,9 +66,9 @@ public class ClothesService {
     }
 
     /**
-     * Удаляет мебель по идентификатору.
+     * Удаляет предмет одежды по идентификатору
      *
-     * @param id Идентификатор мебели для удаления.
+     * @param id Идентификатор предмета для удаления
      */
     @Transactional
     public void delete(int id) {
@@ -77,20 +76,18 @@ public class ClothesService {
     }
 
     /**
-     * Проверяет отсутствие мебели в базе данных по идентификатору.
-     *
-     * @param id Идентификатор мебели для проверки.
-     * @return true, если мебель отсутствует, иначе false.
+     * Проверяет предмета одежды в базе данных по идентификатору
+     * @param id Идентификатор предмета одежды для проверки
+     * @return true, если предмет одежды отсутствует, иначе false.
      */
     public boolean doesNotExist(int id) {
         return !repository.existsById(id);
     }
 
     /**
-     * Фильтрует мебель по имени.
-     *
-     * @param name Имя для фильтрации мебели.
-     * @return Список мебели, соответствующей заданному имени.
+     * Фильтрует предметы одежды по имени
+     * @param name Имя для фильтрации одежды
+     * @return Список предметов одежды, соответствующей заданному имени.
      */
     public List<Clothes> filterByName(String name) {
         return repository.findByNameContains(name);

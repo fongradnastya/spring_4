@@ -7,12 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Класс, запускающий работу программы
  */
 @SpringBootApplication
-public class Main {
+public class Application {
     /**
      * Точка входа в приложение.
      * @param args аргументы командной строки
      */
     public static void main(String[] args) {
-        SpringApplication.run(Main.class, args);
+        SpringApplication.run(Application.class, args);
     }
 }
