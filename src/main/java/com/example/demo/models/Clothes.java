@@ -8,6 +8,9 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 
+/**
+ * Класс для работы с таблицей одежды
+ */
 @Entity
 @Table(name = "clothes")
 public class Clothes {

@@ -1,4 +1,4 @@
--- Create table if it doesn't exist
+-- Create tables if they don't exist
 CREATE TABLE IF NOT EXISTS clothes (
     id SERIAL PRIMARY KEY,
     item_name VARCHAR(255),

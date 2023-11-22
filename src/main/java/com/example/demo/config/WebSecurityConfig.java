@@ -13,18 +13,33 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+/**
+ * Класс конфигурации для настройки SpringSecurity в приложении.
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 @ComponentScan("com.example.demo")
 public class WebSecurityConfig {
-
+    /**
+     * Сервис информации о пользователе
+     */
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Конструктор для SecurityConfiguration
+     * @param userDetailsService Пользовательский сервис деталей пользователя для аутентификации
+     */
     public WebSecurityConfig(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Конфигурирует цепочку фильтров безопасности для различных HTTP-запросов и формной аутентификации/выхода
+     * @param http Конфигурация безопасности HTTP
+     * @return Сконфигурированный бин SecurityFilterChain
+     * @throws Exception Если происходит ошибка во время конфигурации
+     */
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -46,11 +61,21 @@ public class WebSecurityConfig {
                 );
         return http.build();
     }
-
+    /**
+     * Предоставляет бин BCryptPasswordEncoder для кодирования пароля
+     * @return Бин BCryptPasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /**
+     * Конфигурирует менеджер аутентификации с пользовательским сервисом деталей и кодировщиком пароля
+     * @param http Конфигурация безопасности HTTP
+     * @return Сконфигурированный бин AuthenticationManager
+     * @throws Exception Если происходит ошибка во время конфигурации
+     */
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder authenticationManagerBuilder =

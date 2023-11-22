@@ -8,16 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * Реализация контроллера обработки ошибок.
+ * Контроллер обработки ошибок
  */
 @Controller
 public class ErrorControllerImpl implements ErrorController {
     /**
-     * Обработчик запроса для обработки ошибок.
-     *
-     * @param request Запрос HTTP.
-     * @param model   Модель для передачи данных в представление.
-     * @return Имя представления для обработки ошибок.
+     * Обработчик запроса для обработки ошибок
+     * @param request Запрос HTTP
+     * @param model   Модель для передачи данных в представление
+     * @return Имя представления для обработки ошибок
      */
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, Model model) {

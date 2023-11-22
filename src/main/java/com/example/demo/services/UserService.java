@@ -3,22 +3,31 @@ package com.example.demo.services;
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
+/**
+ * Сервис для работы с пользователями системы
+ */
 @Service
 @Transactional(readOnly = true)
 public class UserService {
-
+    /**
+     * Репозиторий для работы с пользователями
+     */
     private final UserRepository userRepository;
+    /**
+     * Кодировщик паролей
+     */
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * Конструктор для ShopUserService
+     * @param userRepository Репозиторий пользователей магазина
+     * @param passwordEncoder    Кодировщик паролей
+     */
     @Autowired
     public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
