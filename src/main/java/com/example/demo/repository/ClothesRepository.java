@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface ClothesRepository extends JpaRepository<Clothes, Integer> {
 
-    // Находит все записи мебели, имя которых содержит заданную подстроку.
+    // Находит все записи, имя которых содержит заданную подстроку.
     List<Clothes> findByNameContains(String name);
 
 }
