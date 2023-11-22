@@ -22,7 +22,7 @@
             <p class="card-text" th:text="'Price: ' + ${clothes.price} + ' $'">Price</p>
             <p class="card-text" th:text="'Quantity: ' + ${clothes.quantity} + ' in stock'">Quantity</p>
             <a th:href="@{/clothes/{id}/edit(id=${clothes.id})}" class="btn btn-primary">Edit</a>
-            <form th:action="@{/{id}(id=${clothes.id})}" method="post" class="delete">
+            <form th:action="@{/delete/{id}(id=${clothes.id})}" method="post" class="delete">
                 <input type="hidden" name="_method" value="delete"/>
                 <button type="submit" class="btn btn-danger">Delete</button>
             </form>

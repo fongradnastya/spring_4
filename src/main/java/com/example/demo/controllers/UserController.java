@@ -1,48 +1,45 @@
 package com.example.demo.controllers;
 
+import com.example.demo.models.User;
 import com.example.demo.services.UserService;
+import com.example.demo.util.UserValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
 public class UserController {
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
+
+    private final UserValidator userValidator;
 
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, UserValidator userValidator) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
+        this.userValidator = userValidator;
     }
 
     @GetMapping("/sign-up")
-    public String registration() {
+    public String registration(@ModelAttribute("user") User user) {
         return "sign_up";
     }
 
-    @PostMapping("/sign-up")
-    public String registerNewUser(@RequestParam String username, @RequestParam String password) {
-        String encodedPassword = passwordEncoder.encode(password);
-        if ("admin".equalsIgnoreCase(username)) {
-            userService.registerAdmin(username, encodedPassword);
+    @PostMapping("/process_reg")
+    public String doReg(@ModelAttribute("user") @Valid User shopUser, BindingResult bindingResult) {
+        userValidator.validate(shopUser, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "sign_up";
         } else {
-            userService.registerUser(username, encodedPassword);
+            userService.registerUser(shopUser);
+            return "redirect:/login";
         }
-        return "redirect:/login";
     }
 
     @GetMapping("/login")
-    public String login(@RequestParam(value = "error", required = false) String error, Model model) {
-        if (error != null) {
-            model.addAttribute("loginError", true);
-        }
+    public String login() {
         return "login";
     }
 }

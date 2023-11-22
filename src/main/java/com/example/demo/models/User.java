@@ -1,9 +1,13 @@
 package com.example.demo.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
+import lombok.Data;
 
 @Entity
 @Table(name = "users")
+@Data
 public class User {
     @Id
     @Column(name = "id")
@@ -11,6 +15,8 @@ public class User {
     private int id;
 
     @Column(name = "username")
+    @NotEmpty
+    @Size(min = 2, max = 100)
     private String username;
 
     @Column(name = "password")
@@ -18,16 +24,6 @@ public class User {
 
     @Column(name = "status")
     private String status;
-
-    public User(){
-        status = "user";
-    }
-
-    public User(String username, String password) {
-        this.username = username;
-        this.password = password;
-        status = "user";
-    }
 
     public int getId() {
         return id;

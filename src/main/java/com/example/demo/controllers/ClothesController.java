@@ -42,7 +42,7 @@ public class ClothesController {
      * @param model Модель для передачи данных в представление
      * @return Имя представления для отображения
      */
-    @GetMapping("/")
+    @GetMapping("/home")
     public String listClothes(@RequestParam(name = "name", required = false) String name, Model model) {
         model.addAttribute("currentPage", "index");
         if (name != null) {
@@ -120,7 +120,7 @@ public class ClothesController {
         }
         clothesService.save(clothes);
         redirectAttributes.addFlashAttribute("message", "Clothes successfully added.");
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     /**
@@ -143,7 +143,7 @@ public class ClothesController {
             return "error";
         }
         clothesService.update(id, clothes);
-        return "redirect:/";
+        return "redirect:/home";
     }
 
     /**
@@ -151,13 +151,13 @@ public class ClothesController {
      * @param id Идентификатор предмета одежды для удаления
      * @return Перенаправление на список предметов одежды
      */
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteClothes(@PathVariable("id") int id) {
         if (clothesService.doesNotExist(id)) {
             logger.error("Attempted to delete non-existing clothes with id {}", id);
             return "error";
         }
         clothesService.delete(id);
-        return "redirect:/";
+        return "redirect:/home";
     }
 }

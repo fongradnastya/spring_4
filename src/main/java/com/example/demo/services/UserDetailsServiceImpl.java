@@ -2,18 +2,14 @@ package com.example.demo.services;
 
 import com.example.demo.models.User;
 import com.example.demo.repository.UserRepository;
+import com.example.demo.security.ShopUserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -25,21 +21,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
+    /**
+     * Получает пользователя по его имени
+     * @param username имя пользователя
+     * @return ShopUserDetails для пользователя
+     * @throws UsernameNotFoundException если пользователь не был найден
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username).orElseThrow(() ->
-                new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(
-                user.getUsername(),
-                user.getPassword(),
-                getAuthorities(user)
-        );
-    }
-    private Collection<SimpleGrantedAuthority> getAuthorities(User user) {
-        Set<String> roles = new HashSet<>();
-        roles.add(user.getStatus());
-        return roles.stream()
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toList());
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new ShopUserDetails(user.get());
     }
 }
